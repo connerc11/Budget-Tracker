@@ -1,5 +1,6 @@
+{
 "name": "The Budget Tracker",
-"short_name": "Budget"
+"short_name": "Budget",
 "icons": [
     {
         "src": "icons/icon-512x512.png",
@@ -35,9 +36,10 @@
         "src": "icons/icon-72x72.png",
         "sizes": "72x72",
         "type": "image/png"
-    },
-]
-"theme_color":
-"background_color":
-"start_url":
-"display":
+    }
+],
+"theme_color": "#dddddd",
+"background_color": "#dddddd",
+"start_url": ".",
+"display": ""
+}
