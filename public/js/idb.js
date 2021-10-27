@@ -25,3 +25,46 @@ function saveRecord(record) {
 
     budgetTrackerObjectStore.add(record);
 }
+
+function uploadData() {
+   
+    const transaction = db.transaction(['new_budget'], 'readwrite');
+  
+    
+    const budgetTrackerObjectStore = transaction.objectStore('new_budget');
+  
+    
+    const getAll = budgetTrackerObjectStore.getAll();
+  
+    getAll.onsuccess = function() {
+        if (getAll.result.length > 0) {
+          fetch('/api/transaction', {
+            method: 'POST',
+            body: JSON.stringify(getAll.result),
+            headers: {
+              Accept: 'application/json, text/plain, */*',
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(response => response.json())
+            .then(serverResponse => {
+              if (serverResponse.message) {
+                throw new Error(serverResponse);
+              }
+              
+              const transaction = db.transaction(['new_budget'], 'readwrite');
+             
+              const budgetTrackerObjectStore = transaction.objectStore('new_budget');
+             
+              budgetTrackerObjectStore.clear();
+    
+              alert('All of the saved budgets has been submitted!');
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      };
+  }
+
+  window.addEventListener('online', uploadData);
