@@ -40,6 +40,7 @@
 ],
 "theme_color": "#dddddd",
 "background_color": "#dddddd",
-"start_url": ".",
-"display": ""
+"start_url": "./index.html",
+"display": "standalone",
+"description": "budget tracker app"
 }
